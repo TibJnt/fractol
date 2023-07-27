@@ -6,7 +6,7 @@
 /*   By: tjeunet <tjeunet@student.42barcelona.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 18:26:45 by dacortes          #+#    #+#             */
-/*   Updated: 2023/07/25 18:15:24 by tjeunet          ###   ########.fr       */
+/*   Updated: 2023/07/27 16:17:37 by tjeunet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,16 @@ int	handle_key_event(int keycode, t_fractol *f)
 
 int	mouse_event(int keycode, int x, int y, t_fractol *f)
 {
+	if (f->var.set == JULIA && keycode == MIDDLE_CLICK)
+	{
+		// Map the x coordinate of the mouse cursor to the real part of the complex constant.
+    	// This is done by linearly mapping the x coordinate from the pixel range to the range of real values.
+    	f->mouse.posre = f->var.min_re + (double)x * (f->var.max_re - f->var.min_re) / WIDTH;
+
+    	// Map the y coordinate of the mouse cursor to the imaginary part of the complex constant.
+    	// This is done by linearly mapping the y coordinate from the pixel range to the range of imaginary values.
+    	f->mouse.posim = f->var.max_im + (double)y * (f->var.min_im - f->var.max_im) / HEIGHT;
+	}
 	if (keycode == SCROLL_UP)
 	{
 		zoom(f, 1.2);
@@ -97,6 +107,6 @@ int	mouse_event(int keycode, int x, int y, t_fractol *f)
 		zoom(f, 0.8);
 	else
 		return (FALSE);
-	status_menu_render(f);
+	render(f, -1, -1);
 	return (FALSE);
 }

@@ -6,7 +6,7 @@
 /*   By: tjeunet <tjeunet@student.42barcelona.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 17:24:37 by tjeunet           #+#    #+#             */
-/*   Updated: 2023/07/25 17:24:39 by tjeunet          ###   ########.fr       */
+/*   Updated: 2023/07/27 16:04:08 by tjeunet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int	julia_click(int x, int y, t_fractol *f)
 		f->mouse.posim = f->var.y;
 		set_pos(f->mouse.posre, f->mouse.posim, &f->set_t, f);
 	}
-	status_menu_render(f);
+	render(f, -1, -1);
 	return (SUCCESS);
 }
 
